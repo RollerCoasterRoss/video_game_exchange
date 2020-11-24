@@ -1,0 +1,3 @@
+@genres.map do |genre|
+  render partial: "genre.json.jb", locals: {genre: genre}
+end 

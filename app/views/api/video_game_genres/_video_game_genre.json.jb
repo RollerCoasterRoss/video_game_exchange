@@ -1,0 +1,4 @@
+{
+  id: video_game_genre.id,
+  genre: (render partial: "api/genres/genre.json.jb", locals: {genre: video_game_genre.genre})
+}

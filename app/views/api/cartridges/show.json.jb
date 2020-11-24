@@ -1,0 +1,1 @@
+render partial: "cartridge.json.jb", locals: {cartridge: @cartridge}

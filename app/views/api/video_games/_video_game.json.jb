@@ -1,0 +1,15 @@
+{
+  id: video_game.id,
+  title: video_game.title,
+  platform: video_game.platform,
+  rating_category: video_game.rating_category,
+  online: video_game.online,
+  release_year: video_game.release_year,
+  video_game_genres: (video_game.video_game_genres.map { |video_game_genre|
+    render partial: "api/video_game_genres/video_game_genre.json.jb", locals: {video_game_genre: video_game_genre}
+  }),
+  formatted: {
+    platform: video_game.formatted_platform,
+    rating_category: video_game.formatted_rating_category
+  }
+}

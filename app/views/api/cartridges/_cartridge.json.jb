@@ -1,0 +1,13 @@
+complete_view = {
+  id: cartridge.id,
+  video_game: (render partial: "api/video_games/video_game", locals: { video_game: cartridge.video_game }),
+  owner_id: cartridge.owner_id,
+  borrower_id: cartridge.borrower_id,
+  lend_date: cartridge.lend_date
+}
+
+if cartridge.borrower_id
+  complete_view[:borrower_name] = cartridge.borrower.first_name
+end
+
+complete_view

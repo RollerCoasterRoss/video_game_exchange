@@ -1,0 +1,3 @@
+@cartridges.map do |cartridge|
+  render partial: "cartridge.json.jb", locals: {cartridge: cartridge}
+end

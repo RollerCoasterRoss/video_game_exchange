@@ -1,0 +1,5 @@
+{
+  id: @genre.id,
+  name: @genre.name,
+  video_game_titles: (@genre.video_games.map {|video_game| "#{video_game.title} - #{video_game.formatted_platform}"})
+}
