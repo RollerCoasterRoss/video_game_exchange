@@ -1,4 +1,11 @@
 class Api::CartridgesController < ApplicationController
+  def index
+    @cartridges = Cartridge.where("borrower_id IS NULL AND owner_id != ?", current_user.id)
+    @cartridges = @cartridges.includes(:video_game).order("video_games.title ASC, video_games.platform ASC")
+    
+    render "index.json.jb"
+  end
+
   def owner_index
     @cartridges = current_user.my_cartridges
 
@@ -34,9 +41,10 @@ class Api::CartridgesController < ApplicationController
 
   def update
     @cartridge = Cartridge.find(params[:id])
+    borrowing = params[:borrow] == "true"
 
-    @cartridge.borrower_id = params[:borrower_id] || @cartridge.borrower_id
-    @cartridge.lend_date = params[:lend_date] || @cartridge.lend_date
+    @cartridge.borrower_id = borrowing ? current_user.id : nil
+    @cartridge.lend_date = borrowing ? Time.now : nil
 
     if @cartridge.save
       render "show.json.jb"

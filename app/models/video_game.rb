@@ -82,4 +82,8 @@ class VideoGame < ApplicationRecord
       rating_category
     end
   end
+
+  def formatted_online
+    online ? "Yes" : "No"
+  end
 end

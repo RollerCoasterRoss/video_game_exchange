@@ -10,6 +10,7 @@
   }),
   formatted: {
     platform: video_game.formatted_platform,
-    rating_category: video_game.formatted_rating_category
+    rating_category: video_game.formatted_rating_category,
+    online: video_game.formatted_online
   }
 }

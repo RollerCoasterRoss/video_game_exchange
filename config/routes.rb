@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     post "/video_game_genres" => "video_game_genres#create"
     delete "/video_game_genres/:id" => "video_game_genres#destroy"
 
+    get "/cartridges" => "cartridges#index"
     get "/cartridges/owned" => "cartridges#owner_index"
     get "/cartridges/borrowed" => "cartridges#borrower_index"
     post "/cartridges" => "cartridges#create"
