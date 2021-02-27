@@ -1,4 +1,6 @@
 class Api::CartridgesController < ApplicationController
+  before_action :authenticate_user
+
   def index
     @cartridges = Cartridge.where("borrower_id IS NULL AND owner_id != ?", current_user.id)
     @cartridges = @cartridges.includes(:video_game).order("video_games.title ASC, video_games.platform ASC")
@@ -21,9 +23,7 @@ class Api::CartridgesController < ApplicationController
   def create
     @cartridge = Cartridge.new(
       video_game_id: params[:video_game_id],
-      owner_id: params[:owner_id],
-      borrower_id: params[:borrower_id],
-      lend_date: params[:lend_date]
+      owner_id: current_user.id
     )
 
     if @cartridge.save
@@ -41,7 +41,7 @@ class Api::CartridgesController < ApplicationController
 
   def update
     @cartridge = Cartridge.find(params[:id])
-    borrowing = params[:borrow] == "true"
+    borrowing = (params[:borrow] == "true")
 
     @cartridge.borrower_id = borrowing ? current_user.id : nil
     @cartridge.lend_date = borrowing ? Time.now : nil

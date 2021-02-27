@@ -14,7 +14,7 @@ class VideoGame < ApplicationRecord
                   ps1: 4,
                   gamecube: 5,
                   ps2: 6,
-                  xbox: 7,
+                  xbox_og: 7,
                   wii: 8,
                   ps3: 9,
                   xbox_360: 10,
@@ -39,7 +39,7 @@ class VideoGame < ApplicationRecord
       "Nintendo Gamecube"
     when "ps2"
       "Sony Playstation 2"
-    when "xbox"
+    when "xbox_og"
       "Microsoft XBox"
     when "wii"
       "Nintendo Wii"
