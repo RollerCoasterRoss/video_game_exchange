@@ -7,7 +7,15 @@ complete_view = {
   lend_date: cartridge.lend_date
 }
 
-if cartridge.borrower_id
+user = current_user
+
+if user
+  complete_view[:borrowed_by_me] = cartridge.borrowed_by_me?(user)
+  complete_view[:borrowed_from_me] = cartridge.borrowed_from_me?(user)
+  complete_view[:owned_and_playable] = cartridge.owned_and_playable?(user)
+
+  complete_view[:borrower_name] = cartridge.dynamic_borrower_name(user)
+elsif cartridge.borrower_id
   complete_view[:borrower_name] = cartridge.borrower.first_name
 end
 

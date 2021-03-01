@@ -2,7 +2,16 @@ class Api::CartridgesController < ApplicationController
   before_action :authenticate_user
 
   def index
-    @cartridges = Cartridge.where("borrower_id IS NULL AND owner_id != ?", current_user.id)
+    genre_name = params[:genre]
+
+    if genre_name
+      genre = Genre.find_by(name: genre_name)
+      @cartridges = genre.cartridges
+    else
+      @cartridges = Cartridge.all
+    end
+
+    @cartridges = @cartridges.where("borrower_id IS NULL AND owner_id != ?", current_user.id)
     @cartridges = @cartridges.includes(:video_game).order("video_games.title ASC, video_games.platform ASC")
     
     render "index.json.jb"
