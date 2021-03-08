@@ -1,4 +1,6 @@
 class Api::VideoGamesController < ApplicationController
+  before_action :authenticate_user
+
   def index
     @video_games = VideoGame.all
 

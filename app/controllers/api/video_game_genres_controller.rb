@@ -1,4 +1,6 @@
 class Api::VideoGameGenresController < ApplicationController
+  before_action :authenticate_user
+
   def create
     @video_game_genre = VideoGameGenre.new(
       genre_id: params[:genre_id],
@@ -16,6 +18,6 @@ class Api::VideoGameGenresController < ApplicationController
     video_game_genre = VideoGameGenre.find(params[:id])
     video_game_genre.destroy
 
-    render json: { message: "Association deleted!" }
+    render json: { message: "Genre deleted!" }
   end
 end
